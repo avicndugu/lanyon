@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
   {% include head.html %}
 
   <body>
-
     {% include sidebar.html %}
 
     <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
@@ -20,12 +18,20 @@
       </div>
 
       <div class="container content">
-        {{ content }}
+        {% for language in site.languages %} {% if language == page.language or
+        post.language %}
+
+        <p>{{language}}</p>
+        {% else %} {% if language == site.language %}
+        <a href="/">{{language}}</a>
+        {% else %}
+        <a href="/{{ language }}">{{language}}</a>
+        {% endif %} {% endif %} {% endfor %} {{ content }}
       </div>
     </div>
 
     <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
-    <script src='{{ site.baseurl }}/public/js/script.js'></script>
+    <script src="{{ site.baseurl }}/public/js/script.js"></script>
   </body>
 </html>
