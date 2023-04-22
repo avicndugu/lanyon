@@ -2,7 +2,24 @@
 layout: default
 ---
 
+{% assign translatedpages = site.pages | where: 'ref', page.ref %} {% for
+translatedpage in translatedpages %}
+<div class="post">
+  <a href="{{ translatedpage.url | absolute_url }}">
+    {{ translatedpage.language }}
+  </a>
+</div>
+{% endfor %}
+
 <div class="page">
   <h1 class="page-title">{{ page.title }}</h1>
-  {{ content }}
+  {% for language in site.languages %} {% if language == page.language %}
+  <p>{{language}}</p>
+
+  {% else %} {% if language == site.language %}
+  <a href="/{{ page.ref }}">{{language}}</a>
+
+  {% else %}
+  <a href="/{{ language }}/{{ page.ref }}">{{language}}</a>
+  {% endif %} {% endif %} {% endfor %} {{ content }}
 </div>

@@ -2,10 +2,26 @@
 layout: default
 ---
 
+{% comment %}========================Method 1==================={% endcomment %}
+{% assign translatedposts = site.posts | where: 'ref', page.ref %} {% for post
+in translatedposts %}
+<div class="post">
+  <a href="{{ post.url | absolute_url }}"> {{ post.language }} </a>
+</div>
+{% endfor %}
+
 <div class="post">
   <h1 class="post-title">{{ page.title }}</h1>
   <span class="post-date">{{ page.date | date_to_string }}</span>
-  {{ content }}
+
+  {% comment %} =====================Method 2==================={% endcomment %}
+  {% for language in site.languages %} {% if language == post.language %}
+  <p>{{language}}</p>
+  {% else %} {% if language == site.language %}
+  <a href="/{{ page.ref }}">{{language}}</a>
+  {% else %}
+  <a href="/{{ language }}/{{ page.ref }}">{{language}}</a>
+  {% endif %} {% endif %} {% endfor %} {{ content }}
 </div>
 
 {% if site.related_posts.size >= 1 %}

@@ -17,17 +17,7 @@
         </div>
       </div>
 
-      <div class="container content">
-        {% for language in site.languages %} {% if language == page.language or
-        post.language %}
-
-        <p>{{language}}</p>
-        {% else %} {% if language == site.language %}
-        <a href="/">{{language}}</a>
-        {% else %}
-        <a href="/{{ language }}">{{language}}</a>
-        {% endif %} {% endif %} {% endfor %} {{ content }}
-      </div>
+      <div class="container content">{{ content }}</div>
     </div>
 
     <label for="sidebar-checkbox" class="sidebar-toggle"></label>

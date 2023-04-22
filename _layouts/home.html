@@ -2,12 +2,13 @@
 layout: default
 ---
 
-<p>{{ page.language }}</p>
-{% assign siteposts = site.posts | where: 'language',page.language %} {% for
-post in siteposts %}
 <div class="post">
-  <h1 class="post-title">
-    <a href="{{ post.url | absolute_url }}"> {{ post.title }} </a>
-  </h1>
+  {% for language in site.languages %} {% if language == post.language %}
+  <p>{{language}}</p>
+  {% else %} {% if language == site.language %}
+  <a href="/">{{language}}</a>
+  {% else %}
+  <a href="/{{ language }}/">{{language}}</a>
+  {% endif %} {% endif %} {% endfor %}
 </div>
-{% endfor %}
+{{ content }}
